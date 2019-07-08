@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<header>
+    <title>
+        Rock Paper Scissors
+    </title>
+</header>
+
+<body>
+    <script>
+
+        function computerPlay(){
+            let rand = Math.round(Math.random()*2); //gives 0,1,2
+
+
+            switch (rand){
+                case (0):
+                    return "ROCK";
+                    break;
+                case (1):
+                    return "PAPER";
+                    break;
+                case (2):
+                    return "SCISSORS";
+                    break;
+            }
+        }
+
+        function playRound(playerSelection, computerSelection){
+            let player=playerSelection.toUpperCase(); //using toUpperCase() is convention
+            let computer=computerSelection;
+
+            if (player==computer){
+                return "It's a Tie!";
+            } else {
+                switch (true) {
+                    case (player=="ROCK") && (computer=="SCISSORS"):
+                        return "You Win! Rock beats Scissors";
+                        break;
+                    case (player=="ROCK") && (computer=="PAPER"):
+                        return "You Lose! Paper beats Rock";
+                        break;
+                    case (player=="PAPER") && (computer=="ROCK"):
+                        return "You Win! Paper beats Rock";
+                        break;
+                    case (player=="PAPER") && (computer=="SCISSORS"):
+                        return "You Lose! Scissors beats Paper";
+                        break;
+                    case (player=="SCISSORS") && (computer=="PAPER"):
+                        return "You Win! Scissors beats Paper";
+                        break;
+                    case (player=="SCISSORS") && (computer=="ROCK"):
+                        return "You Lose! Rock beats Scissors";
+                        break; 
+
+                }
+            
+                
+            }
+            
+        }
+
+        function decide(message){
+            return (message.includes("Tie")) ? "Tie" : 
+            (message.includes("Win")) ? "Win": "Lose";
+        }
+
+        function game(){
+            let playerScore=0;
+            let computerScore=0;
+
+            let playerSelection=prompt("Pick your move", "rock,paper or scissors");
+            let message = playRound(playerSelection,computerPlay());
+            console.log(message);
+
+            let decision=decide(message);
+
+            switch(true){
+                case (decision=="Win"):
+                    ++playerScore;
+                    break;
+                case (decision=="Lose"):
+                    ++computerScore;
+                    break;
+            }
+
+             playerSelection=prompt("Pick your move", "rock,paper or scissors");
+             message = playRound(playerSelection,computerPlay());
+            console.log(message);
+
+             decision=decide(message);
+
+            switch(true){
+                case (decision=="Win"):
+                    ++playerScore;
+                    break;
+                case (decision=="Lose"):
+                    ++computerScore;
+                    break;
+            }
+
+            playerSelection=prompt("Pick your move", "rock,paper or scissors");
+            message = playRound(playerSelection,computerPlay());
+            console.log(message);
+
+            decision=decide(message);
+
+            switch(true){
+                case (decision=="Win"):
+                    ++playerScore;
+                    break;
+                case (decision=="Lose"):
+                    ++computerScore;
+                    break;
+            }
+
+            playerSelection=prompt("Pick your move", "rock,paper or scissors");
+            message = playRound(playerSelection,computerPlay());
+            console.log(message);
+
+            decision=decide(message);
+
+            switch(true){
+                case (decision=="Win"):
+                    ++playerScore;
+                    break;
+                case (decision=="Lose"):
+                    ++computerScore;
+                    break;
+            }
+
+            playerSelection=prompt("Pick your move", "rock,paper or scissors");
+            message = playRound(playerSelection,computerPlay());
+            console.log(message);
+
+            decision=decide(message);
+
+            switch(true){
+                case (decision=="Win"):
+                    ++playerScore;
+                    break;
+                case (decision=="Lose"):
+                    ++computerScore;
+                    break;
+            }
+
+            console.log("Player: " +playerScore+ "   Computer: " +computerScore);
+            console.log((playerScore>computerScore) ? "Good Job!": (playerScore<computerScore) ? "Better Luck Next Time!" : "You Tied!");
+
+            
+
+            
+
+
+        }
+
+
+        
+    </script>
+</body>
