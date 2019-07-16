@@ -81,14 +81,7 @@
             (message.includes("Win")) ? "Win": "Lose";
         }
 
-        function game(){
-            let playerScore=0;
-            let computerScore=0;
-
-            let playerSelection=prompt("Pick your move", "rock,paper or scissors");
-            let message = playRound(playerSelection,computerPlay());
-            console.log(message);
-
+        function record(message){
             let decision=decide(message);
 
             switch(true){
@@ -99,7 +92,29 @@
                     ++computerScore;
                     break;
             }
-            console.log("Player: " +playerScore+ "   Computer: " +computerScore);
+            const container = document.querySelector('.results');
+
+            const content = document.createElement('div');
+            content.classList.add('content');
+            content.textContent = "Player: " +playerScore+ "   Computer: " +computerScore;
+            
+            container.appendChild(content);
+            if (playerScore === 5 || computerScore === 5){
+                const record = document.createElement('div');
+                record.classList.add('record');
+                if(playerScore>computerScore){
+                    record.style.cssText = "color: blue";
+                    record.textContent = "You Won!";
+                } else {
+                    record.style.cssText = "color: red";
+                    record.textContent = "You Lost! Better luck next time!"
+                }
+
+                container.appendChild(record);
+                
+            }
+            
+            
             console.log((playerScore>computerScore) ? "Good Job!": (playerScore<computerScore) ? "Better Luck Next Time!" : "You Tied!");
         }
 
@@ -113,6 +128,8 @@
             container.appendChild(content);
         }
 
+        let playerScore=0;
+        let computerScore=0;
 
         var rock = document.querySelector('#rock');
         var paper = document.querySelector('#paper');
@@ -120,14 +137,17 @@
         rock.addEventListener('click', () => {
             let message = playRound("rock",computerPlay());
             result(message);
+            record(message);
         });
         paper.addEventListener('click', () => {
             let message = playRound("paper",computerPlay());
             result(message);
+            record(message);
         });
         scissors.addEventListener('click', () => {
             let message = playRound("scissors",computerPlay());
             result(message);
+            record(message);
         });
 
         
