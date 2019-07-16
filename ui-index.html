@@ -19,6 +19,10 @@
                 <button id="scissors">Scissors</button>
             </div>
         </div>
+
+        <div class="results">
+
+        </div>
     </div>
 
     <script>
@@ -95,32 +99,35 @@
                     ++computerScore;
                     break;
             }
-
-            
-
             console.log("Player: " +playerScore+ "   Computer: " +computerScore);
             console.log((playerScore>computerScore) ? "Good Job!": (playerScore<computerScore) ? "Better Luck Next Time!" : "You Tied!");
-
-            
-
-            
-
-
         }
+
+        function result(message){
+            const container = document.querySelector('.results');
+
+            const content = document.createElement('div');
+            content.classList.add('content');
+            content.textContent = message;
+            
+            container.appendChild(content);
+        }
+
+
         var rock = document.querySelector('#rock');
         var paper = document.querySelector('#paper');
         var scissors = document.querySelector('#scissors');
         rock.addEventListener('click', () => {
             let message = playRound("rock",computerPlay());
-            console.log(message);
+            result(message);
         });
         paper.addEventListener('click', () => {
             let message = playRound("paper",computerPlay());
-            console.log(message);
+            result(message);
         });
         scissors.addEventListener('click', () => {
             let message = playRound("scissors",computerPlay());
-            console.log(message);
+            result(message);
         });
 
         
