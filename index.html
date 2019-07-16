@@ -10,13 +10,13 @@
     <div class = "container">
         <div class = "buttons">
             <div class = "button">
-                <button id="rock">Rock</button>
+                <button class="rock">Rock</button>
             </div>
             <div class = "button">
-                <button id="paper">Paper</buton>
+                <button class="paper">Paper</buton>
             </div>
             <div class = "button">
-                <button id="scissors">Scissors</button>
+                <button class="scissors">Scissors</button>
             </div>
         </div>
 
@@ -100,6 +100,9 @@
             
             container.appendChild(content);
             if (playerScore === 5 || computerScore === 5){
+
+                disconnect();
+
                 const record = document.createElement('div');
                 record.classList.add('record');
                 if(playerScore>computerScore){
@@ -114,8 +117,6 @@
                 
             }
             
-            
-            console.log((playerScore>computerScore) ? "Good Job!": (playerScore<computerScore) ? "Better Luck Next Time!" : "You Tied!");
         }
 
         function result(message){
@@ -127,28 +128,31 @@
             
             container.appendChild(content);
         }
+        //pass event or it will automatically call
+        function play(event){
+            let button = this.classList.item(0);
+            let message = playRound(button,computerPlay());
+            result(message);
+            record(message);
+        }
+
+        function disconnect(){
+            rock.removeEventListener('click',play);
+            paper.removeEventListener('click', play);
+            scissors.removeEventListener('click', play);
+        }
 
         let playerScore=0;
         let computerScore=0;
 
-        var rock = document.querySelector('#rock');
-        var paper = document.querySelector('#paper');
-        var scissors = document.querySelector('#scissors');
-        rock.addEventListener('click', () => {
-            let message = playRound("rock",computerPlay());
-            result(message);
-            record(message);
-        });
-        paper.addEventListener('click', () => {
-            let message = playRound("paper",computerPlay());
-            result(message);
-            record(message);
-        });
-        scissors.addEventListener('click', () => {
-            let message = playRound("scissors",computerPlay());
-            result(message);
-            record(message);
-        });
+        var rock = document.querySelector('.rock');
+        var paper = document.querySelector('.paper');
+        var scissors = document.querySelector('.scissors');
+
+        //use named function so that disconnect can work
+        rock.addEventListener('click', play);
+        paper.addEventListener('click', play);
+        scissors.addEventListener('click', play);
 
         
     </script>
